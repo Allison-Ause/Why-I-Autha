@@ -4,6 +4,7 @@
 // import component creators
 import createAuthForm from './components/AuthForm.js';
 import createAuthError from './components/AuthError.js';
+import { signIn, signUp } from './services/members-service.js';
 
 let errorMessage = '';
 
@@ -18,35 +19,39 @@ async function handlePageLoad() {
 
 async function handleSignIn(email, password) {
     // *** remove next line after verifying credentials are working
-    console.log(email, password);
+    // console.log(email, password);
 
-    const response = null; // *** ? (don't forget call is asynchronous!)
+    const response = await signIn(email, password); // *** ? (don't forget call is asynchronous!)
+
     checkAuth(response);
 }
 
 async function handleSignUp(email, password) {
     // *** remove next line after verifying credentials are working
-    console.log(email, password);
+    // console.log(email, password);
 
-    const response = null; // *** ? (don't forget call is asynchronous!)
+    const response = await signUp(email, password); // *** ? (don't forget call is asynchronous!)
     checkAuth(response);
 }
 
 function checkAuth(response) {
     // *** remove next line after verifying user is being returned
-    console.log(response.user);
+    // console.log(response.user); - successfully returning user object w/data
 
     if (response?.error) {
         // *** 
         // 1. console.log the response.error
+        console.log(response.error);
         // 2. set the errorMessage state from response.error.message
+        errorMessage = response.error.message;
         // (keep this line👇 before console.log)
         // eslint-disable-next-line no-console
-
+        console.log(errorMessage); // logs 'Invalid Login Credentials'
         display();
     }
     else {
         // *** redirect (use replace) to './members'
+        location.replace('./members');
     }
 }
 
