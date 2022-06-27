@@ -41,7 +41,7 @@ function checkAuth(response) {
     if (response?.error) {
         // *** 
         // 1. console.log the response.error
-        console.log(response.error);
+        // console.log(response.error);
         // 2. set the errorMessage state from response.error.message
         errorMessage = response.error.message;
         // (keep this line👇 before console.log)
